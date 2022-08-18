@@ -233,7 +233,7 @@ private fun ScrollingBubble(
                             shape = MaterialTheme.shapes.medium
                         )
                         .background(
-                            color = MaterialTheme.colors.surface,
+                            color = MaterialTheme.colors.primary,
                             shape = MaterialTheme.shapes.medium
                         )
                         .padding(vertical = 8.dp, horizontal = 16.dp),
@@ -258,7 +258,7 @@ private fun ScrollingBubble(
                             bottomStart = 50.dp,
                             topStart = 50.dp
                         ),
-                        color = MaterialTheme.colors.onPrimary
+                        color = MaterialTheme.colors.primary
                     ),
                 contentDescription = null
             )
