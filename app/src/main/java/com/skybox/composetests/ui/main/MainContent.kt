@@ -5,25 +5,20 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.skybox.composetests.R
 
 @ExperimentalMaterialApi
 @Composable
-fun MainContent(menuItems: List<MenuItem>) {
-    val navController = rememberNavController()
-
+fun MainContent(navController: NavHostController, menuItems: List<MenuItem>) {
     NavHost(navController = navController, startDestination = "main") {
         composable("main") {
             MainScreen(menuItems) { route ->
@@ -39,12 +34,12 @@ fun MainContent(menuItems: List<MenuItem>) {
                     repeat(children.size) { length ->
                         val child = children[length]
                         composable(child.route) {
-                            child.composable()
+                            child.composable?.invoke()
                         }
                     }
                 }
             } else {
-                composable(item.route) { item.composable() }
+                composable(item.route) { item.composable?.invoke() }
             }
         }
     }
@@ -79,16 +74,25 @@ fun MainScreen(menuItems: List<MenuItem>, navigate: (String) -> Unit) {
 @ExperimentalMaterialApi
 @Composable
 fun MenuGroup(menuItem: MenuItem, navigate: (String) -> Unit) {
-    val expanded by remember {
+    var expanded by remember {
         mutableStateOf(false)
     }
 
-    Card(modifier = Modifier.fillMaxWidth()) {
-        Column(Modifier.fillMaxWidth()) {
-            Row(Modifier.fillMaxWidth()) {
+    Card(modifier = Modifier.fillMaxWidth(), onClick = {
+        expanded = !expanded
+    }) {
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .padding(20.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 Text(text = menuItem.label)
                 Icon(
-                    if (expanded) Icons.Default.ArrowDropDown else Icons.Default.KeyboardArrowUp,
+                    if (expanded) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowUp,
                     contentDescription = ""
                 )
             }

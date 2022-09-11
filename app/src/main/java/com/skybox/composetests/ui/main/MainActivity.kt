@@ -10,8 +10,11 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.skybox.composetests.features.effects.RecompositionTest
 import com.skybox.composetests.features.scroller.LazyColumnView
+import com.skybox.composetests.features.textfield.TextFieldChipsScreen
 import com.skybox.composetests.ui.theme.ComposeTestsTheme
 
 @ExperimentalMaterialApi
@@ -24,13 +27,15 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MainContent(getContent())
+                    val navController = rememberNavController()
+
+                    MainContent(navController, getContent(navController))
                 }
             }
         }
     }
 
-    private fun getContent(): List<MenuItem> {
+    private fun getContent(navHostController: NavHostController): List<MenuItem> {
         return listOf(
             MenuItem(
                 route = "effect", label = "Launched Effect",
@@ -43,7 +48,19 @@ class MainActivity : ComponentActivity() {
                 composable = {
                     LazyColumnView()
                 },
-            )
+            ),
+            MenuItem(
+                "", label = "Text Fields",
+                isGroup = true,
+                children = listOf(
+                    MenuItem(
+                        route = "textFiled_chips", label = "Text Field With Chips",
+                        composable = {
+                            TextFieldChipsScreen(navHostController)
+                        },
+                    )
+                ),
+            ),
         )
     }
 }

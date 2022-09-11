@@ -7,5 +7,5 @@ data class MenuItem(
     val label: String,
     val isGroup: Boolean = false,
     val children: List<MenuItem>? = null,
-    val composable: @Composable () -> Unit
+    val composable: @Composable (() -> Unit)? = null
 )
