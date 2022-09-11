@@ -1,10 +1,11 @@
-package com.skybox.composetests.scroller
+package com.skybox.composetests.features.scroller
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Card
 import androidx.compose.material.Text
@@ -14,11 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LazyColumnView() {
     val listData = (0..5000).toList()
-    val listState = rememberLazyListState()
+    val listState = rememberLazyGridState()
 
     Box(
         modifier = Modifier
@@ -27,7 +27,7 @@ fun LazyColumnView() {
     ) {
         LazyVerticalGrid(
             state = listState,
-            cells = GridCells.Fixed(3),
+            columns = GridCells.Fixed(3),
             verticalArrangement = Arrangement.spacedBy(8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
@@ -55,11 +55,11 @@ fun LazyColumnView() {
 
             }
         }
-        Scroller(
-            listState = listState,
-            txt = "Jefff",
-            modifier = Modifier,
-        )
+//        Scroller(
+//            listState = listState,
+//            txt = "Jefff",
+//            modifier = Modifier,
+//        )
     }
 }
 

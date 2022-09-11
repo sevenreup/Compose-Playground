@@ -1,4 +1,4 @@
-package com.skybox.composetests.effects
+package com.skybox.composetests.features.effects
 
 import android.util.Log
 import androidx.compose.material.Text

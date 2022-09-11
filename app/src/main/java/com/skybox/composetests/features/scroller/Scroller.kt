@@ -1,4 +1,4 @@
-package com.skybox.composetests.scroller
+package com.skybox.composetests.features.scroller
 
 import android.util.Log
 import androidx.compose.animation.*
@@ -21,7 +21,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
